@@ -1,0 +1,72 @@
+{% load static %}
+<div id="wrapper">
+    <header class="tech-header header">
+        <div class="container-fluid">
+            <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="images/version/tech-logo.png" alt="News Aggregator"></a>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/newsaggregator/news_list">Business</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/newsaggregator/health_list">Health</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/newsaggregator/sports_list">Sports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/newsaggregator/cnn_articles">CNN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/newsaggregator/citizen_digital_articles">Citizen Digital</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin">Admin</a>
+                        </li>
+
+                        <!-- If user is authenticated, show username and logout button -->
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <span class="nav-link">Welcome, {{ user.username }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link"
+                                    style="background: none; border: none; cursor: pointer;">Logout</button>
+                            </form>
+                        </li>
+                        <!-- If user is not authenticated, show login link -->
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                    <ul class="navbar-nav mr-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-rss"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-android"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-apple"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- end container-fluid -->
+    </header><!-- end market-header -->
+</div>

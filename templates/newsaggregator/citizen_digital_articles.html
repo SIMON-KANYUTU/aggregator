@@ -1,0 +1,120 @@
+<!--This part is for models-->
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% include "nav.html" %}
+<section class="section single-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+
+                    <div class="blog-title-area text-center">
+                        <ol class="breadcrumb hidden-xs-down">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/newsaggregator/news_list">Blog</a></li>
+                            <li class="breadcrumb-item active">Find the Latest Business Citizen News
+                                Today</li>
+                        </ol>
+
+                        <span class="color-orange"><a href="#" title="">Citizen Digital News</a></span>
+
+                        <h3>Find the Latest Citizen Digital Business News Today</h3>
+
+                        <div class="blog-meta big-meta">
+                            <small><a href="#" title="">Aggregated News</a></small>
+                            <small><a href="#" title="">Today</a></small>
+                            <small><a href="#" title=""><i class="fa fa-eye"></i> Views
+                                </a></small>
+                        </div><!-- end meta -->
+
+                        <div class="post-sharing">
+                            <ul class="list-inline">
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                                        class="fb-button btn btn-primary" target="_blank"><i class="fa fa-facebook"></i>
+                                        <span class="down-mobile">Share on
+                                            Facebook</span></a></li>
+                                <li><a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}"
+                                        class="tw-button btn btn-primary" target="_blank"><i class="fa fa-twitter"></i>
+                                        <span class="down-mobile">Tweet on
+                                            Twitter</span></a></li>
+                            </ul>
+                        </div><!-- end post-sharing -->
+                    </div><!-- end title -->
+                    <div class="blog-top clearfix">
+                        <h4 class="pull-left">Recent News <a href="#"><i class="fa fa-rss"></i></a></h4>
+                    </div><!-- end blog-top -->
+                    {% for article in citizen_digital_articles %}
+                    <div class="blog-meta big-meta col-md-8">
+                        <h4> {{ article.title }} </h4>
+                        <h6><a href="{% url 'article_detail' article.id %}" style="color: cadetblue; font-weight: bold;"
+                                title="">
+                                View Full
+                                Article</a></h6>
+                        <p>{{ article.content }}</p>
+                        <small>
+                            <a href="#" title="">{{ article.source }}</a>
+                            by {{ article.byline }} | {{ article.time }}
+                        </small>
+
+                        <span class="bg-orange"><a href="#" title="">
+                                Sentiment: {{ article.sentiment }}
+                            </a></span>
+
+                        <form action="{% url 'save_article' article.id %}" method="post">
+                            {% csrf_token %}
+                            {% if not request.user.is_authenticated %}
+                            <p>Please <a href="{% url 'login' %}">login</a> to save
+                                articles.</p>
+                            {% else %}
+                            <button type="submit">Save Article</button>
+                            <!-- Display success message -->
+                            {% for message in messages %}
+                            <p class="success-message" style="color: green; font-weight: bold;">{{ message }}
+                            </p>
+                            {% endfor %}
+                            {% endif %}
+                        </form>
+
+                        <!-- If you have a view count field in your model -->
+                        <!-- <small><a href="#" title=""><i class="fa fa-eye"></i> {{ news.view_count }}</a></small> -->
+                    </div><!-- end meta -->
+                    <hr class="invis">
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Pagination -->
+            {% if articles.has_other_pages %}
+            <ul class="pagination" style="text-align: center;">
+                {% if articles.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ articles.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                {% for i in articles.paginator.page_range %}
+                <li class="page-item {% if articles.number == i %}active{% endif %}">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+                {% endfor %}
+                {% if articles.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ articles.next_page_number }}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ articles.paginator.num_pages }}">Last</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+            <!-- End Pagination -->
+
+
+        </div>
+    </div>
+</section>
+
+{% include "footer.html" %}
+{% endblock content %}

@@ -1,0 +1,67 @@
+<!-- profile_update.html -->
+<!--This part is for models-->
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% include "nav.html" %}
+<section class="section single-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+
+                    <div class="blog-title-area text-center">
+                        <ol class="breadcrumb hidden-xs-down">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/newsaggregator/news_list">Blog</a></li>
+                            <li class="breadcrumb-item active">My Profile</li>
+                        </ol>
+                        {% if user.is_authenticated %}
+                        <span class="color-orange"><a href="#" title="">Business News</a></span>
+
+                        <h3>Hello, {{ user.username }}</h3>
+
+                        <div class="blog-meta big-meta">
+                            <small><a href="#" title="">Aggregated News</a></small>
+                            <small><a href="#" title="">Today</a></small>
+                            <small><a href="#" title=""><i class="fa fa-eye"></i> Views
+                                </a></small>
+                        </div><!-- end meta -->
+
+
+                    </div><!-- end title -->
+                    <div class="blog-top clearfix">
+                        <h4 class="pull-left">Update Profile : {{ user.username }} <a href="#"><i
+                                    class="fa fa-rss"></i></a>
+                        </h4>
+                    </div><!-- end blog-top -->
+
+                    <div class="blog-meta big-meta col-md-8">
+
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">Update Profile</button>
+                        </form>
+                        {% endif %}
+
+                        <hr class="invis">
+
+                        <li><a href="/newsauth/saved_articles">Find Saved Articles <span></span></a>
+                        </li>
+                        <!-- If you have a view count field in your model -->
+                        <!-- <small><a href="#" title=""><i class="fa fa-eye"></i> {{ news.view_count }}</a></small> -->
+                    </div><!-- end meta -->
+                    <hr class="invis">
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+{% include "footer.html" %}
+{% endblock content %}

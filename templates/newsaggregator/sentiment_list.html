@@ -1,0 +1,16 @@
+{% for article in articles %}
+<div class="blog-meta big-meta col-md-8">
+    <h4><a href="{{ article.url }}" title="">{{ article.title }}</a></h4>
+    <p>{{ article.content }}</p>
+    <small>
+        <a href="#" title="">{{ article.source }}</a>
+        by {{ article.byline }} | {{ article.time }}
+    </small>
+
+    <span class="bg-orange"><a href="#" title="">
+
+
+
+            <p>Sentiment: (V2) {{ sentiment_results|get:article.id }}</p>
+        </a></span>
+</div>

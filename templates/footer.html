@@ -1,0 +1,90 @@
+{% load static %}
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="widget">
+                    <div class="footer-text text-left">
+                        <a href="index.html"><img src="images/version/tech-footer-logo.png" alt=""
+                                class="img-fluid"></a>
+                        <p>News Aggregator App. We find all the best News from acrosss multiple sources</p>
+                        <div class="social">
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i
+                                    class="fa fa-facebook"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i
+                                    class="fa fa-twitter"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i
+                                    class="fa fa-instagram"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Plus"><i
+                                    class="fa fa-google-plus"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i
+                                    class="fa fa-pinterest"></i></a>
+                        </div>
+
+                        <hr class="invis">
+
+                        <div class="newsletter-widget text-left">
+                            <form class="form-inline">
+                                <input type="text" class="form-control" placeholder="Enter your email address">
+                                <button type="submit" class="btn btn-primary">SUBMIT</button>
+                            </form>
+                        </div><!-- end newsletter -->
+                    </div><!-- end footer-text -->
+                </div><!-- end widget -->
+            </div><!-- end col -->
+
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <h2 class="widget-title">Popular Categories</h2>
+                    <div class="link-widget">
+                        <ul>
+                            <li><a href="/newsaggregator/news_list">Business <span>({{ total_articles }})</span></a>
+                            </li>
+                            <li><a href="/newsaggregator/sports_list">Sports <span></span></a>
+                            </li>
+                            <li><a href="/newsaggregator/health_list">Health <span></span></a>
+                            </li>
+                            <li><a href="/newsaggregator/sentiment_list">Sentiments List <span></span></a>
+                            </li>
+                            <li><a href="/newsauth/profile_update">Update Profile <span></span></a>
+                            </li>
+                            <li><a href="/newsauth/saved_articles">Saved Articles <span></span></a>
+                            </li>
+                        </ul>
+                    </div><!-- end link-widget -->
+                </div><!-- end widget -->
+            </div><!-- end col -->
+
+            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <h2 class="widget-title">Copyrights</h2>
+                    <div class="link-widget">
+                        <ul>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Advertise with us</a></li>
+                            <li><a href="#">Trademark</a></li>
+                            <li><a href="#">License & Help</a></li>
+                        </ul>
+                    </div><!-- end link-widget -->
+                </div><!-- end widget -->
+            </div><!-- end col -->
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <br>
+                <div class="copyright">&copy; NewsAggregator. Design: <a href="#">By Simon Kanyutu Kimani</a>.
+                </div>
+            </div>
+        </div>
+    </div><!-- end container -->
+</footer><!-- end footer -->
+
+<div class="dmtop">Scroll to Top</div>
+<!-- Core JavaScript
+    ================================================== -->
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/tether.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>

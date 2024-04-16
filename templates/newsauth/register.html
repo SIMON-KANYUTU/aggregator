@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% include "nav.html" %}
+<!---Form Custom CSS File--->
+<link href="{% static 'form/style.css' %}" rel="stylesheet">
+<div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+        <header>Login</header>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="text" id="login_username" name="login_username" placeholder="Enter your Username">
+            <input type="password" id="login_password" name="login_password" placeholder="Enter your password">
+            <a href="/newsauth/forgot_password">Forgot password?</a>
+            <input type="submit" class="button" formmethod="post" value="Login">
+            <!-- Display error message -->
+            {% if error_message %}
+            <p class="error-message" style="color: red; font-weight: bold;">{{ error_message }}</p>
+            {% endif %}
+            <!-- Display success message -->
+            {% if messages %}
+            {% for message in messages %}
+            <p class="success-message" style="color: green; font-weight: bold;">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+        </form>
+
+        <div class="signup">
+            <span class="signup">Don't have an account?
+                <label for="check">Signup</label>
+            </span>
+        </div>
+    </div>
+    <div class="registration form">
+        <header>Signup</header>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <input type="text" id="username" placeholder="Enter a Username" name="username">
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+            <input type="password" id="password" name="password" placeholder="Create a password">
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password">
+            <input type="submit" class="button" formmethod="post" value="Signup">
+            <!-- Display error message -->
+            {% if error_message %}
+            <p class="error-message" style="color: red; font-weight: bold;">{{ error_message }}</p>
+            {% endif %}
+            <!-- Display success message -->
+            {% if messages %}
+            {% for message in messages %}
+            <p class="success-message" style="color: green; font-weight: bold;">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+        </form>
+        <div class="signup">
+            <span class="signup">Already have an account?
+                <label for="check">Login</label>
+            </span>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+{% include "footer.html" %}

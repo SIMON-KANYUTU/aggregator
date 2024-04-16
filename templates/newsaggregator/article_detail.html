@@ -1,0 +1,90 @@
+<!--This part is for models-->
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% include "nav.html" %}
+<section class="section single-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+
+                    <div class="blog-title-area text-center">
+                        <ol class="breadcrumb hidden-xs-down">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/newsaggregator/news_list">Blog</a></li>
+                            <li class="breadcrumb-item active">Find the Latest Business News
+                                Today</li>
+                        </ol>
+
+                        <span class="color-orange"><a href="#" title="">Business News</a></span>
+
+                        <h3>{{ article.title }}</h3>
+
+                        <div class="blog-meta big-meta">
+                            <small><a href="#" title="">Aggregated News</a></small>
+                            <small><a href="#" title="">Today</a></small>
+                            <small><a href="#" title=""><i class="fa fa-eye"></i> Views
+                                </a></small>
+                        </div><!-- end meta -->
+
+                        <div class="post-sharing">
+                            <ul class="list-inline">
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                                        class="fb-button btn btn-primary" target="_blank"><i class="fa fa-facebook"></i>
+                                        <span class="down-mobile">Share on
+                                            Facebook</span></a></li>
+                                <li><a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}"
+                                        class="tw-button btn btn-primary" target="_blank"><i class="fa fa-twitter"></i>
+                                        <span class="down-mobile">Tweet on
+                                            Twitter</span></a></li>
+                            </ul>
+                        </div><!-- end post-sharing -->
+                    </div><!-- end title -->
+                    <div class="blog-top clearfix">
+                        <h4 class="pull-left">Recent News <a href="#"><i class="fa fa-rss"></i></a></h4>
+                    </div><!-- end blog-top -->
+
+                    <div class="blog-meta big-meta col-md-8">
+                        <h4 title="">{{ article.title }} </h4>
+                        <p>{{ article.content }}</p>
+                        <small>
+                            <a href="#" title="">{{ article.source }}</a>
+                            by {{ article.byline }} | {{ article.time }}
+                        </small>
+
+                        <span class="bg-orange"><a href="#" title="">
+                                Sentiment: {{ article.sentiment }}
+                            </a></span>
+
+                        <form action="{% url 'save_article' article.id %}" method="post">
+                            {% csrf_token %}
+                            {% if not request.user.is_authenticated %}
+                            <p>Please <a href="{% url 'login' %}">login</a> to save
+                                articles.</p>
+                            {% else %}
+                            <button type="submit">Save Article</button>
+                            <!-- Display success message -->
+                            {% for message in messages %}
+                            <p class="success-message" style="color: green; font-weight: bold;">{{ message }}
+                            </p>
+                            {% endfor %}
+                            {% endif %}
+                        </form>
+
+                        <!-- If you have a view count field in your model -->
+                        <!-- <small><a href="#" title=""><i class="fa fa-eye"></i> {{ news.view_count }}</a></small> -->
+                    </div><!-- end meta -->
+                    <hr class="invis">
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+{% include "footer.html" %}
+{% endblock content %}
